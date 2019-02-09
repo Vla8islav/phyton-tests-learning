@@ -1,4 +1,4 @@
-from point import Point
+from geom2d.point import Point
 
 a = Point(0, 0)
 b = Point(3, 8)
