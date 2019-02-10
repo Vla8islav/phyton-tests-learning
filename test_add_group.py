@@ -9,16 +9,26 @@ class UntitledTestCase(unittest.TestCase):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def test_untitled_test_case(self):
+    def test_add_group(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/index.php")
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_css_selector("input[value='Login']").click()
-        wd.find_element_by_link_text("groups").click()
-        wd.find_element_by_name("new").click()
+        self.OpenHomePage(wd)
+        self.Login(wd)
+        self.GoToGroupsPage(wd)
+        self.CreateNewGroup(wd)
+        self.FillGroupData(wd)
+        self.SubmitGroupData(wd)
+        self.Logout(wd)
+
+    def Logout(self, wd):
+        # Logout
+        wd.find_element_by_link_text("Logout").click()
+
+    def SubmitGroupData(self, wd):
+        # Submit group data
+        wd.find_element_by_name("submit").click()
+
+    def FillGroupData(self, wd):
+        # Fill group data
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys("Some text 01")
@@ -26,9 +36,26 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("group_header").send_keys("Some text 02")
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys("some text 03")
-        wd.find_element_by_name("submit").click()
-        wd.find_element_by_link_text("group page").click()
-        wd.find_element_by_link_text("Logout").click()
+
+    def CreateNewGroup(self, wd):
+        # Create a new group
+        wd.find_element_by_name("new").click()
+
+    def GoToGroupsPage(self, wd):
+        # Go to groups page
+        wd.find_element_by_link_text("groups").click()
+
+    def Login(self, wd):
+        # Login
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_css_selector("input[value='Login']").click()
+
+    def OpenHomePage(self, wd):
+        # Open home page
+        wd.get("http://localhost/addressbook/index.php")
 
     def is_element_present(self, how, what):
         try:
