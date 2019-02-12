@@ -5,37 +5,37 @@ from contact import Contact
 import unittest
 
 
-class UntitledTestCase(unittest.TestCase):
+class AddContactTestCase(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def test_user1_create(self):
+    def test_create_user1(self):
         wd = self.wd
-        self.OpenHomePage(wd)
-        self.Login(wd, User("admin", "secret"))
-        self.GoToUserCreationPage(wd)
+        self.open_home_page(wd)
+        self.login(wd, User("admin", "secret"))
+        self.go_to_user_creation_page(wd)
         c = Contact("Name", "MiddleName", "LastName", "email@email.com")
-        self.FillUserInfoFields(c, wd)
-        self.SubmitForm(wd)
-        self.Logout(wd)
+        self.fill_user_info_fields(c, wd)
+        self.submit_form(wd)
+        self.logout(wd)
 
-    def test_user2_create(self):
+    def test_create_user2(self):
         wd = self.wd
-        self.OpenHomePage(wd)
-        self.Login(wd, User("admin", "secret"))
-        self.GoToUserCreationPage(wd)
+        self.open_home_page(wd)
+        self.login(wd, User("admin", "secret"))
+        self.go_to_user_creation_page(wd)
         c = Contact("Name2", "MiddleName2", "LastName2", "email2@email.com")
-        self.FillUserInfoFields(c, wd)
-        self.SubmitForm(wd)
-        self.Logout(wd)
+        self.fill_user_info_fields(c, wd)
+        self.submit_form(wd)
+        self.logout(wd)
 
-    def SubmitForm(self, wd):
+    def submit_form(self, wd):
         wd.find_element_by_css_selector(
             "input[value='Enter']").click()
         wd.find_element_by_link_text("home").click()
 
-    def FillUserInfoFields(self, c, wd):
+    def fill_user_info_fields(self, c, wd):
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(c.Name)
@@ -47,15 +47,15 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(c.Email)
 
-    def GoToUserCreationPage(self, wd):
+    def go_to_user_creation_page(self, wd):
         wd.find_element_by_id("footer").click()
         wd.find_element_by_link_text("add new").click()
 
-    def OpenHomePage(self, wd):
+    def open_home_page(self, wd):
         # Open home page
         wd.get("http://localhost/addressbook/index.php")
 
-    def Login(self, wd, user):
+    def login(self, wd, user):
         # Login
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(user.username)
@@ -63,7 +63,7 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(user.password)
         wd.find_element_by_css_selector("input[value='Login']").click()
 
-    def Logout(self, wd):
+    def logout(self, wd):
         # Logout
         wd.find_element_by_link_text("Logout").click()
 
