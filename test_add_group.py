@@ -5,40 +5,40 @@ from group import Group
 import unittest
 
 
-class UntitledTestCase(unittest.TestCase):
+class AddGroupTestCase(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def test_add_empty_group(self):
+    def test_group_create_empty_values(self):
         wd = self.wd
-        self.OpenHomePage(wd)
-        self.Login(wd, "admin", "secret")
-        self.CreateGroup(wd, Group("", "", ""))
-        self.Logout(wd)
+        self.open_home_page(wd)
+        self.login(wd, "admin", "secret")
+        self.create_group(wd, Group("", "", ""))
+        self.logout(wd)
 
-    def test_add_group(self):
+    def test_group_create(self):
         wd = self.wd
-        self.OpenHomePage(wd)
-        self.Login(wd, "admin", "secret")
-        self.CreateGroup(wd, Group("Some text 01", "Some text 02", "some text 03"))
-        self.Logout(wd)
+        self.open_home_page(wd)
+        self.login(wd, "admin", "secret")
+        self.create_group(wd, Group("Some text 01", "Some text 02", "some text 03"))
+        self.logout(wd)
 
-    def CreateGroup(self, wd, group):
-        self.GoToGroupPage(wd)
-        self.GoToGroupCreationPage(wd)
-        self.FillGroupData(wd, group)
-        self.SubmitGroupData(wd)
+    def create_group(self, wd, group):
+        self.go_to_groups_page(wd)
+        self.create_new_group(wd)
+        self.fill_group_data(wd, group)
+        self.submit_group_data(wd)
 
-    def Logout(self, wd):
+    def logout(self, wd):
         # Logout
         wd.find_element_by_link_text("Logout").click()
 
-    def SubmitGroupData(self, wd):
+    def submit_group_data(self, wd):
         # Submit group data
         wd.find_element_by_name("submit").click()
 
-    def FillGroupData(self, wd, group):
+    def fill_group_data(self, wd, group):
         # Fill group data
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -48,15 +48,15 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
 
-    def GoToGroupCreationPage(self, wd):
+    def create_new_group(self, wd):
         # Create a new group
         wd.find_element_by_name("new").click()
 
-    def GoToGroupPage(self, wd):
+    def go_to_groups_page(self, wd):
         # Go to groups page
         wd.find_element_by_link_text("groups").click()
 
-    def Login(self, wd, username, password):
+    def login(self, wd, username, password):
         # Login
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -64,7 +64,7 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_css_selector("input[value='Login']").click()
 
-    def OpenHomePage(self, wd):
+    def open_home_page(self, wd):
         # Open home page
         wd.get("http://localhost/addressbook/index.php")
 
