@@ -11,23 +11,23 @@ class AddGroupTestCase(unittest.TestCase):
 
     def test_add_group(self):
         wd = self.wd
-        self.OpenHomePage(wd)
-        self.Login(wd)
-        self.GoToGroupsPage(wd)
-        self.CreateNewGroup(wd)
-        self.FillGroupData(wd)
-        self.SubmitGroupData(wd)
-        self.Logout(wd)
+        self.open_home_page(wd)
+        self.login(wd)
+        self.go_to_groups_page(wd)
+        self.create_new_group(wd)
+        self.fill_group_data(wd)
+        self.submit_group_data(wd)
+        self.logout(wd)
 
-    def Logout(self, wd):
+    def logout(self, wd):
         # Logout
         wd.find_element_by_link_text("Logout").click()
 
-    def SubmitGroupData(self, wd):
+    def submit_group_data(self, wd):
         # Submit group data
         wd.find_element_by_name("submit").click()
 
-    def FillGroupData(self, wd):
+    def fill_group_data(self, wd):
         # Fill group data
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -37,15 +37,15 @@ class AddGroupTestCase(unittest.TestCase):
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys("some text 03")
 
-    def CreateNewGroup(self, wd):
+    def create_new_group(self, wd):
         # Create a new group
         wd.find_element_by_name("new").click()
 
-    def GoToGroupsPage(self, wd):
+    def go_to_groups_page(self, wd):
         # Go to groups page
         wd.find_element_by_link_text("groups").click()
 
-    def Login(self, wd):
+    def login(self, wd):
         # Login
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
@@ -53,7 +53,7 @@ class AddGroupTestCase(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_css_selector("input[value='Login']").click()
 
-    def OpenHomePage(self, wd):
+    def open_home_page(self, wd):
         # Open home page
         wd.get("http://localhost/addressbook/index.php")
 
