@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest
 
 
-class UntitledTestCase(unittest.TestCase):
+class AddGroupTestCase(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
