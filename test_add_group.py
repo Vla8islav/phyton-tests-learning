@@ -10,17 +10,19 @@ class AddGroupTestCase(unittest.TestCase):
         self.wd.implicitly_wait(30)
 
     def test_group_create_empty_values(self):
+        group = Group("", "", "")
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, User("admin", "secret"))
-        self.create_group(wd, Group("", "", ""))
+        self.create_group(wd, group)
         self.logout(wd)
 
     def test_group_create(self):
+        group = Group("Some text 01", "Some text 02", "some text 03")
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, User("admin", "secret"))
-        self.create_group(wd, Group("Some text 01", "Some text 02", "some text 03"))
+        self.create_group(wd, group)
         self.logout(wd)
 
     def create_group(self, wd, group):
