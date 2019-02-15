@@ -1,14 +1,5 @@
-import pytest
 from model.group import Group
 from model.user import User
-from fixture.application import Application
-
-
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 
 def test_group_create_empty_values(app):

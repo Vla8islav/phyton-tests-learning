@@ -1,14 +1,4 @@
-import pytest
-from model.contact import Contact
 from model.user import User
-from fixture.application import Application
-
-
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 
 def test_delete_first_contact(app):
