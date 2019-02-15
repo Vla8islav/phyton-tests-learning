@@ -3,17 +3,17 @@ class GroupHelper:
     def __init__(self, app):
         self.app = app
 
-    def create_group(self, group):
-        self.go_to_groups_page()
-        self.create_new_group()
-        self.fill_group_data(group)
-        self.submit_group_data()
+    def create(self, group):
+        self.open_groups_page()
+        self.open_creation_page()
+        self.fill_info_fields(group)
+        self.submit_data()
 
-    def submit_group_data(self):
+    def submit_data(self):
         # Submit group data
         self.app.wd.find_element_by_name("submit").click()
 
-    def fill_group_data(self, group):
+    def fill_info_fields(self, group):
         # Fill group data
         self.app.wd.find_element_by_name("group_name").click()
         self.app.wd.find_element_by_name("group_name").clear()
@@ -23,10 +23,10 @@ class GroupHelper:
         self.app.wd.find_element_by_name("group_footer").clear()
         self.app.wd.find_element_by_name("group_footer").send_keys(group.footer)
 
-    def create_new_group(self):
+    def open_creation_page(self):
         # Create a new group
         self.app.wd.find_element_by_name("new").click()
 
-    def go_to_groups_page(self):
+    def open_groups_page(self):
         # Go to groups page
         self.app.wd.find_element_by_link_text("groups").click()
