@@ -8,6 +8,12 @@ class ContactHelper:
         self.fill_info_fields(c)
         self.submit_form()
 
+    def delete_first_contact(self):
+        self.open_list_page()
+        self.check_first_contact_in_a_list()
+        self.click_delete_button()
+        self.confirm_contact_deletion()
+
     def submit_form(self):
         self.app.wd.find_element_by_css_selector(
             "input[value='Enter']").click()
@@ -28,3 +34,19 @@ class ContactHelper:
     def open_creation_page(self):
         self.app.wd.find_element_by_id("footer").click()
         self.app.wd.find_element_by_link_text("add new").click()
+
+    def open_list_page(self):
+        self.app.wd.find_element_by_xpath("//a[.='home']").click()
+
+    def check_first_contact_in_a_list(self):
+        self.get_all_contacts_in_a_list().click()
+
+    def get_all_contacts_in_a_list(self):
+        return self.app.wd.find_element_by_css_selector("input[type=checkbox]")
+
+    def click_delete_button(self):
+        self.app.wd.find_element_by_css_selector("input[value='Delete']").click()
+
+    def confirm_contact_deletion(self):
+        alert = self.app.wd.switch_to_alert()
+        alert.accept()
