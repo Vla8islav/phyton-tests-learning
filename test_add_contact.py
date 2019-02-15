@@ -12,60 +12,58 @@ class AddContactTestCase(unittest.TestCase):
 
     def test_create_user1(self):
         c = Contact("Name", "MiddleName", "LastName", "email@email.com")
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, User("admin", "secret"))
-        self.go_to_user_creation_page(wd)
-        self.fill_contact_info_fields(c, wd)
-        self.submit_form(wd)
-        self.logout(wd)
+        self.open_home_page()
+        self.login(User("admin", "secret"))
+        self.go_to_user_creation_page()
+        self.fill_contact_info_fields(c)
+        self.submit_form()
+        self.logout()
 
     def test_create_user2(self):
         c = Contact("Name2", "MiddleName2", "LastName2", "email2@email.com")
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, User("admin", "secret"))
-        self.go_to_user_creation_page(wd)
-        self.fill_contact_info_fields(c, wd)
-        self.submit_form(wd)
-        self.logout(wd)
+        self.open_home_page()
+        self.login(User("admin", "secret"))
+        self.go_to_user_creation_page()
+        self.fill_contact_info_fields(c)
+        self.submit_form()
+        self.logout()
 
-    def submit_form(self, wd):
-        wd.find_element_by_css_selector(
+    def submit_form(self):
+        self.wd.find_element_by_css_selector(
             "input[value='Enter']").click()
-        wd.find_element_by_link_text("home").click()
+        self.wd.find_element_by_link_text("home").click()
 
-    def fill_contact_info_fields(self, contact, wd):
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.Name)
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.MiddleName)
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.LastName)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.Email)
+    def fill_contact_info_fields(self, contact):
+        self.wd.find_element_by_name("firstname").click()
+        self.wd.find_element_by_name("firstname").clear()
+        self.wd.find_element_by_name("firstname").send_keys(contact.name)
+        self.wd.find_element_by_name("middlename").clear()
+        self.wd.find_element_by_name("middlename").send_keys(contact.middle_name)
+        self.wd.find_element_by_name("lastname").clear()
+        self.wd.find_element_by_name("lastname").send_keys(contact.last_name)
+        self.wd.find_element_by_name("email").click()
+        self.wd.find_element_by_name("email").clear()
+        self.wd.find_element_by_name("email").send_keys(contact.email)
 
-    def go_to_user_creation_page(self, wd):
-        wd.find_element_by_id("footer").click()
-        wd.find_element_by_link_text("add new").click()
+    def go_to_user_creation_page(self):
+        self.wd.find_element_by_id("footer").click()
+        self.wd.find_element_by_link_text("add new").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
         # Open home page
-        wd.get("http://localhost/addressbook/index.php")
+        self.wd.get("http://localhost/addressbook/index.php")
 
-    def login(self, wd, user):
+    def login(self, user):
         # Login
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(user.username)
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(user.password)
-        wd.find_element_by_css_selector("input[value='Login']").click()
+        self.wd.find_element_by_name("user").clear()
+        self.wd.find_element_by_name("user").send_keys(user.username)
+        self.wd.find_element_by_name("pass").clear()
+        self.wd.find_element_by_name("pass").send_keys(user.password)
+        self.wd.find_element_by_css_selector("input[value='Login']").click()
 
-    def logout(self, wd):
+    def logout(self):
         # Logout
-        wd.find_element_by_link_text("Logout").click()
+        self.wd.find_element_by_link_text("Logout").click()
 
     def tearDown(self):
         self.wd.quit()
