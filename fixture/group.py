@@ -9,6 +9,10 @@ class GroupHelper:
         self.fill_info_fields(group)
         self.submit_data()
 
+    def delete(self):
+        self.open_groups_page()
+        self.delete_first_group()
+
     def submit_data(self):
         # Submit group data
         self.app.wd.find_element_by_name("submit").click()
@@ -30,3 +34,13 @@ class GroupHelper:
     def open_groups_page(self):
         # Go to groups page
         self.app.wd.find_element_by_link_text("groups").click()
+
+    def delete_first_group(self):
+        self.click_on_a_checkbox_of_a_first_group()
+        self.click_on_a_delete_group_button()
+
+    def click_on_a_checkbox_of_a_first_group(self):
+        self.app.wd.find_element_by_css_selector("span.group input[type='checkbox']").click()
+
+    def click_on_a_delete_group_button(self):
+        self.app.wd.find_element_by_name("delete").click()
