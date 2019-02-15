@@ -13,16 +13,16 @@ def app(request):
 
 def test_create_user1(app):
     c = Contact("Name", "MiddleName", "LastName", "email@email.com")
-    app.login(User("admin", "secret"))
+    app.session.login(User("admin", "secret"))
     app.create_contact(c)
-    app.logout()
+    app.session.logout()
 
 
 def test_create_user2(app):
     c = Contact("Name2", "MiddleName2", "LastName2", "email2@email.com")
-    app.login(User("admin", "secret"))
+    app.session.login(User("admin", "secret"))
     app.create_contact(c)
-    app.logout()
+    app.session.logout()
 
 
 

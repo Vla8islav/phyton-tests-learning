@@ -13,15 +13,15 @@ def app(request):
 
 def test_group_create_empty_values(app):
     group = Group("", "", "")
-    app.login(User("admin", "secret"))
+    app.session.login(User("admin", "secret"))
     app.create_group(group)
-    app.logout()
+    app.session.logout()
 
 
 def test_group_create(app):
     group = Group("Some text 01", "Some text 02", "some text 03")
-    app.login(User("admin", "secret"))
+    app.session.login(User("admin", "secret"))
     app.create_group(group)
-    app.logout()
+    app.session.logout()
 
 
