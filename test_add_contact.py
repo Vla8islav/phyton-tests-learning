@@ -12,21 +12,20 @@ class AddContactTestCase(unittest.TestCase):
 
     def test_create_user1(self):
         c = Contact("Name", "MiddleName", "LastName", "email@email.com")
-        self.open_home_page()
         self.login(User("admin", "secret"))
-        self.go_to_user_creation_page()
-        self.fill_contact_info_fields(c)
-        self.submit_form()
+        self.create_contact(c)
         self.logout()
 
     def test_create_user2(self):
         c = Contact("Name2", "MiddleName2", "LastName2", "email2@email.com")
-        self.open_home_page()
         self.login(User("admin", "secret"))
+        self.create_contact(c)
+        self.logout()
+
+    def create_contact(self, c):
         self.go_to_user_creation_page()
         self.fill_contact_info_fields(c)
         self.submit_form()
-        self.logout()
 
     def submit_form(self):
         self.wd.find_element_by_css_selector(
@@ -54,6 +53,7 @@ class AddContactTestCase(unittest.TestCase):
         self.wd.get("http://localhost/addressbook/index.php")
 
     def login(self, user):
+        self.open_home_page()
         # Login
         self.wd.find_element_by_name("user").clear()
         self.wd.find_element_by_name("user").send_keys(user.username)

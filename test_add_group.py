@@ -11,14 +11,12 @@ class AddGroupTestCase(unittest.TestCase):
 
     def test_group_create_empty_values(self):
         group = Group("", "", "")
-        self.open_home_page()
         self.login(User("admin", "secret"))
         self.create_group(group)
         self.logout()
 
     def test_group_create(self):
         group = Group("Some text 01", "Some text 02", "some text 03")
-        self.open_home_page()
         self.login(User("admin", "secret"))
         self.create_group(group)
         self.logout()
@@ -57,6 +55,7 @@ class AddGroupTestCase(unittest.TestCase):
 
     def login(self, user):
         # Login
+        self.open_home_page()
         self.wd.find_element_by_name("user").clear()
         self.wd.find_element_by_name("user").send_keys(user.username)
         self.wd.find_element_by_name("pass").clear()
