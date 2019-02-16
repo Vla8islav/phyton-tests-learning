@@ -50,7 +50,7 @@ class ContactHelper:
         self.app.wd.find_element_by_xpath("//a[.='home']").click()
 
     def check_first_contact_in_a_list(self):
-        self.app.wd.find_element_by_css_selector("input[type=checkbox]")
+        self.app.wd.find_element_by_css_selector("input[type=checkbox]").click()
 
     def modify_first_contact_in_a_list(self):
         self.app.wd.find_element_by_css_selector("td img[title='Edit']").click()

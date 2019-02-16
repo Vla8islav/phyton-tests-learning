@@ -3,7 +3,6 @@ class SessionHelper:
         self.app = app
 
     def login(self, user):
-        self.logout()
         # Login
         self.app.open_home_page()
         self.app.wd.find_element_by_name("user").clear()

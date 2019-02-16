@@ -10,13 +10,32 @@ class GroupHelper:
         self.submit_data()
         self.go_back_to_group_page()
 
+    def modify_group(self, group):
+        self.open_groups_page()
+        self.modify_first_group(group)
+
+    def modify_first_group(self, group):
+        self.click_on_a_checkbox_of_a_first_group()
+        self.click_modify_button()
+        self.fill_info_fields(group)
+        self.update_data()
+        self.go_back_to_group_page()
+
     def delete(self):
         self.open_groups_page()
         self.delete_first_group()
+        self.go_back_to_group_page()
+
+    def update_data(self):
+        # Submit group data
+        self.app.wd.find_element_by_name("update").click()
 
     def submit_data(self):
         # Submit group data
         self.app.wd.find_element_by_name("submit").click()
+
+    def click_modify_button(self):
+        self.app.wd.find_element_by_name("edit").click()
 
     def fill_info_fields(self, group):
         # Fill group data
