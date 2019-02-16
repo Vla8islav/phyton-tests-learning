@@ -8,6 +8,7 @@ class GroupHelper:
         self.open_creation_page()
         self.fill_info_fields(group)
         self.submit_data()
+        self.go_back_to_group_page()
 
     def delete(self):
         self.open_groups_page()
@@ -33,7 +34,8 @@ class GroupHelper:
 
     def open_groups_page(self):
         # Go to groups page
-        self.app.wd.find_element_by_link_text("groups").click()
+        self.app.wd.get("http://localhost/addressbook/group.php")
+#        self.app.wd.find_element_by_link_text("groups").click()
 
     def delete_first_group(self):
         self.click_on_a_checkbox_of_a_first_group()
@@ -44,3 +46,6 @@ class GroupHelper:
 
     def click_on_a_delete_group_button(self):
         self.app.wd.find_element_by_name("delete").click()
+
+    def go_back_to_group_page(self):
+        self.app.wd.find_element_by_link_text("group page").click()

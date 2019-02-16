@@ -3,6 +3,7 @@ class SessionHelper:
         self.app = app
 
     def login(self, user):
+        self.logout()
         # Login
         self.app.open_home_page()
         self.app.wd.find_element_by_name("user").clear()
@@ -12,5 +13,5 @@ class SessionHelper:
         self.app.wd.find_element_by_css_selector("input[value='Login']").click()
 
     def logout(self):
-        # Logout
-        self.app.wd.find_element_by_link_text("Logout").click()
+        self.app.wd.delete_all_cookies()
+        self.app.wd.refresh()

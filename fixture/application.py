@@ -1,4 +1,6 @@
+
 from selenium import webdriver
+
 from fixture.contact import ContactHelper
 from fixture.group import GroupHelper
 from fixture.session import SessionHelper
@@ -19,4 +21,3 @@ class Application:
     def open_home_page(self):
         # Open home page
         self.wd.get("http://localhost/addressbook/index.php")
-

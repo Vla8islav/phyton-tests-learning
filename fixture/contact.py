@@ -17,7 +17,7 @@ class ContactHelper:
     def submit_form(self):
         self.app.wd.find_element_by_css_selector(
             "input[value='Enter']").click()
-        self.app.wd.find_element_by_link_text("home").click()
+        self.app.wd.find_element_by_link_text("home page").click()
 
     def fill_info_fields(self, contact):
         self.app.wd.find_element_by_name("firstname").click()
