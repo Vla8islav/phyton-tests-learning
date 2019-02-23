@@ -9,4 +9,9 @@ def test_group_modify_first_group(app):
     app.session.logout()
 
 
+def test_group_modify_first_group_name_only(app):
+    group = Group("New value1_name_only")
+    app.session.login(User("admin", "secret"))
+    app.group.modify_group(group)
+    app.session.logout()
 

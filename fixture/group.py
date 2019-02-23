@@ -39,13 +39,14 @@ class GroupHelper:
 
     def fill_info_fields(self, group):
         # Fill group data
-        self.app.wd.find_element_by_name("group_name").click()
-        self.app.wd.find_element_by_name("group_name").clear()
-        self.app.wd.find_element_by_name("group_name").send_keys(group.name)
-        self.app.wd.find_element_by_name("group_header").clear()
-        self.app.wd.find_element_by_name("group_header").send_keys(group.header)
-        self.app.wd.find_element_by_name("group_footer").clear()
-        self.app.wd.find_element_by_name("group_footer").send_keys(group.footer)
+        self.type("[name='group_name']", group.name)
+        self.type("[name='group_header']", group.header)
+        self.type("[name='group_footer']", group.footer)
+
+    def type(self, css_selector, text):
+        if text is not None:
+            self.app.wd.find_element_by_css_selector(css_selector).clear()
+            self.app.wd.find_element_by_css_selector(css_selector).send_keys(text)
 
     def open_creation_page(self):
         # Create a new group
@@ -54,7 +55,8 @@ class GroupHelper:
     def open_groups_page(self):
         # Go to groups page
         self.app.wd.get("http://localhost/addressbook/group.php")
-#        self.app.wd.find_element_by_link_text("groups").click()
+
+    #        self.app.wd.find_element_by_link_text("groups").click()
 
     def delete_first_group(self):
         self.click_on_a_checkbox_of_a_first_group()
