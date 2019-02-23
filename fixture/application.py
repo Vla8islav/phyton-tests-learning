@@ -22,3 +22,10 @@ class Application:
         # Open home page
         self.wd.get("http://localhost/addressbook/index.php")
         self.wd.refresh()
+
+    def is_valid(self):
+        try:
+            self.wd.current_url
+            return True
+        except:
+            return False
