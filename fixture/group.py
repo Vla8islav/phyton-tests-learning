@@ -4,7 +4,6 @@ class GroupHelper:
         self.app = app
 
     def create(self, group):
-        self.open_groups_page()
         self.open_creation_page()
         self.fill_info_fields(group)
         self.submit_data()
@@ -45,11 +44,13 @@ class GroupHelper:
 
     def open_creation_page(self):
         # Create a new group
+        self.open_groups_page()
         self.app.wd.find_element_by_name("new").click()
 
     def open_groups_page(self):
-        # Go to groups page
-        self.app.wd.get("http://localhost/addressbook/group.php")
+        if not (self.app.wd.current_url.endswith("/group.php") and
+                len(self.app.wd.find_elements_by_css_selector("input[value='Delete group(s)'][name='delete']")) > 0):
+            self.app.wd.get("http://localhost/addressbook/group.php")
 
     def delete_first_group(self):
         self.click_on_a_checkbox_of_a_first_group()
