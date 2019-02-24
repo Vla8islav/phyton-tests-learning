@@ -38,11 +38,15 @@ class ContactHelper:
         self.app.ge.type("[name='email']", contact.email)
 
     def open_creation_page(self):
-        self.app.wd.find_element_by_id("footer").click()
-        self.app.wd.find_element_by_link_text("add new").click()
+        if not (self.app.wd.current_url.endswith("/edit.php") and
+                len(self.app.wd.find_elements_by_css_selector("input[name=submit][value=Enter]")) > 0):
+            self.app.wd.find_element_by_id("footer").click()
+            self.app.wd.find_element_by_link_text("add new").click()
 
     def open_list_page(self):
-        self.app.wd.find_element_by_xpath("//a[.='home']").click()
+        if not (self.app.wd.current_url.endswith("/") and
+                len(self.app.wd.find_elements_by_css_selector("input[type=button][value='Send e-Mail']")) > 0):
+            self.app.wd.find_element_by_xpath("//a[.='home']").click()
 
     def check_first_contact_in_a_list(self):
         self.app.wd.find_element_by_css_selector("input[type=checkbox]").click()
