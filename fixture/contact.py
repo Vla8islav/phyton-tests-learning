@@ -31,16 +31,11 @@ class ContactHelper:
         self.app.wd.find_element_by_link_text("home page").click()
 
     def fill_info_fields(self, contact):
-        self.app.wd.find_element_by_name("firstname").click()
-        self.app.wd.find_element_by_name("firstname").clear()
-        self.app.wd.find_element_by_name("firstname").send_keys(contact.name)
-        self.app.wd.find_element_by_name("middlename").clear()
-        self.app.wd.find_element_by_name("middlename").send_keys(contact.middle_name)
-        self.app.wd.find_element_by_name("lastname").clear()
-        self.app.wd.find_element_by_name("lastname").send_keys(contact.last_name)
-        self.app.wd.find_element_by_name("email").click()
-        self.app.wd.find_element_by_name("email").clear()
-        self.app.wd.find_element_by_name("email").send_keys(contact.email)
+        # Fill group data
+        self.app.ge.type("[name='firstname']", contact.name)
+        self.app.ge.type("[name='middlename']", contact.middle_name)
+        self.app.ge.type("[name='lastname']", contact.last_name)
+        self.app.ge.type("[name='email']", contact.email)
 
     def open_creation_page(self):
         self.app.wd.find_element_by_id("footer").click()
@@ -61,3 +56,7 @@ class ContactHelper:
     def confirm_contact_deletion(self):
         alert = self.app.wd.switch_to_alert()
         alert.accept()
+
+    def count(self):
+        self.open_list_page()
+        return len(self.app.wd.find_elements_by_css_selector("input[type='checkbox'][name='selected[]']"))

@@ -39,14 +39,9 @@ class GroupHelper:
 
     def fill_info_fields(self, group):
         # Fill group data
-        self.type("[name='group_name']", group.name)
-        self.type("[name='group_header']", group.header)
-        self.type("[name='group_footer']", group.footer)
-
-    def type(self, css_selector, text):
-        if text is not None:
-            self.app.wd.find_element_by_css_selector(css_selector).clear()
-            self.app.wd.find_element_by_css_selector(css_selector).send_keys(text)
+        self.app.ge.type("[name='group_name']", group.name)
+        self.app.ge.type("[name='group_header']", group.header)
+        self.app.ge.type("[name='group_footer']", group.footer)
 
     def open_creation_page(self):
         # Create a new group

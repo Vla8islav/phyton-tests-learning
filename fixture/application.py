@@ -4,6 +4,7 @@ from selenium import webdriver
 from fixture.contact import ContactHelper
 from fixture.group import GroupHelper
 from fixture.session import SessionHelper
+from fixture.generic_elements import GenericElementsHelper
 
 
 class Application:
@@ -14,6 +15,7 @@ class Application:
         self.session = SessionHelper(self)
         self.contact = ContactHelper(self)
         self.group = GroupHelper(self)
+        self.ge = GenericElementsHelper(self)
 
     def destroy(self):
         self.wd.quit()
