@@ -56,8 +56,6 @@ class GroupHelper:
         # Go to groups page
         self.app.wd.get("http://localhost/addressbook/group.php")
 
-    #        self.app.wd.find_element_by_link_text("groups").click()
-
     def delete_first_group(self):
         self.click_on_a_checkbox_of_a_first_group()
         self.click_on_a_delete_group_button()
@@ -70,3 +68,7 @@ class GroupHelper:
 
     def go_back_to_group_page(self):
         self.app.wd.find_element_by_link_text("group page").click()
+
+    def count(self):
+        self.open_groups_page()
+        return len(self.app.wd.find_elements_by_css_selector("input[type='checkbox'][name='selected[]']"))
