@@ -6,5 +6,6 @@ def test_delete_first_group(app):
         app.group.create(Group("New group name"))
     group_list_at_start = app.group.get_list()
     app.group.delete()
-    group_list_after_creation = app.group.get_list()
-    assert len(group_list_at_start) - 1 == len(group_list_after_creation)
+    group_list_after_deletion = app.group.get_list()
+    assert len(group_list_at_start) - 1 == len(group_list_after_deletion)
+
