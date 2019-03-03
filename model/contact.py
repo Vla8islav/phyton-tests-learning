@@ -11,13 +11,15 @@ class Contact:
         self.id = contact_id
 
     def __repr__(self):
-        return "Id\t'%s'\tName\t'%s'\tLast name\t'%s'\tMiddle name\t'%s'\tEmail\t'%s'" % (self.id, self.name, self.last_name, self.middle_name, self.email)
+        return "Id\t'%s'\tName\t'%s'\tLast name\t'%s'\tMiddle name\t'%s'\tEmail\t'%s'" % (
+            self.id, self.name, self.last_name, self.middle_name, self.email)
 
     def __eq__(self, other):
-        return self.name == other.name and (self.id is None or other.id is None or self.id == other.id)
+        return self.name == other.name and self.last_name == other.last_name and self.email == other.email and (
+                self.id is None or other.id is None or self.id == other.id)
 
-    def id_with_none(g):
-        if g.id:
-            return g.id
+    def id_with_none(c):
+        if c.id:
+            return c.id
         else:
             return maxsize
