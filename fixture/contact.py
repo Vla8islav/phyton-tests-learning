@@ -1,3 +1,6 @@
+from model.contact import Contact
+
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -44,8 +47,9 @@ class ContactHelper:
             self.app.wd.find_element_by_link_text("add new").click()
 
     def open_list_page(self):
-        if not (self.app.wd.current_url.endswith("/") and
-                len(self.app.wd.find_elements_by_css_selector("input[type=button][value='Send e-Mail']")) > 0):
+        if not ((self.app.wd.current_url.endswith("/") and
+                len(self.app.wd.find_elements_by_css_selector("input[type=button][value='Send e-Mail']")) > 0))\
+                or not self.app.wd.current_url.endswith("/"):
             self.app.wd.find_element_by_xpath("//a[.='home']").click()
 
     def check_first_contact_in_a_list(self):
@@ -64,3 +68,23 @@ class ContactHelper:
     def count(self):
         self.open_list_page()
         return len(self.app.wd.find_elements_by_css_selector("input[type='checkbox'][name='selected[]']"))
+
+    def get_list(self):
+        self.open_list_page()
+        self.app.wd.refresh()
+        contact_web_elements = self.app.wd.find_elements_by_css_selector("table tbody tr[name=entry]")
+
+        contact_list = []
+        if contact_web_elements is not None:
+            for contact_row in contact_web_elements:
+                contact_columns = contact_row.find_elements_by_css_selector("td")
+                contact_id = contact_columns[0].find_element_by_css_selector("input").get_property("value")
+                last_name = contact_columns[1].text
+                first_name = contact_columns[2].text
+                address = contact_columns[3].text
+                email = contact_columns[4].text
+                phone_list = contact_columns[5].text
+
+                contact_list.append(Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email=email))
+
+        return contact_list
