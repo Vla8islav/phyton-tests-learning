@@ -1,3 +1,6 @@
+from model.group import Group
+
+
 class GroupHelper:
 
     def __init__(self, app):
@@ -68,3 +71,15 @@ class GroupHelper:
     def count(self):
         self.open_groups_page()
         return len(self.app.wd.find_elements_by_css_selector("input[type='checkbox'][name='selected[]']"))
+
+    def get_list(self):
+        self.open_groups_page()
+        group_web_elements = self.app.wd.find_elements_by_css_selector("span.group")
+
+        group_list = []
+        for table_row in group_web_elements:
+            input_inside_element = table_row.find_element_by_css_selector("input")
+            current_group_id = input_inside_element.get_property("value")
+            group_list.append(Group(table_row.text, None, None, int(current_group_id)))
+
+        return group_list
