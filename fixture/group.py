@@ -80,6 +80,6 @@ class GroupHelper:
         for table_row in group_web_elements:
             input_inside_element = table_row.find_element_by_css_selector("input")
             current_group_id = input_inside_element.get_property("value")
-            group_list.append(Group(table_row.text, None, None, int(current_group_id)))
+            group_list.append(Group(name=table_row.text, group_id=int(current_group_id)))
 
         return group_list
