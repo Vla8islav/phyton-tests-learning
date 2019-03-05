@@ -15,8 +15,7 @@ class Contact:
             self.id, self.name, self.last_name, self.middle_name, self.email)
 
     def __eq__(self, other):
-        return self.name == other.name and self.last_name == other.last_name and self.email == other.email and (
-                self.id is None or other.id is None or self.id == other.id)
+        return self.name == other.name and self.last_name == other.last_name
 
     def id_with_none(c):
         if c.id:
