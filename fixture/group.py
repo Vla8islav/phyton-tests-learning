@@ -9,7 +9,7 @@ class GroupHelper:
     def create(self, group):
         self.open_creation_page()
         self.fill_info_fields(group)
-        self.submit_data()
+        self.click_submit_data_button()
         self.go_back_to_group_page()
 
     def modify_group(self, group):
@@ -20,7 +20,7 @@ class GroupHelper:
         self.click_on_a_checkbox_of_a_first_group()
         self.click_modify_button()
         self.fill_info_fields(group)
-        self.update_data()
+        self.click_update_data_button()
         self.go_back_to_group_page()
 
     def delete(self):
@@ -28,16 +28,23 @@ class GroupHelper:
         self.delete_first_group()
         self.go_back_to_group_page()
 
-    def update_data(self):
-        # Submit group data
+    def click_update_data_button(self):
+        # Update group data
+        self.group_cache = None
         self.app.wd.find_element_by_name("update").click()
 
-    def submit_data(self):
+    def click_submit_data_button(self):
         # Submit group data
+        self.group_cache = None
         self.app.wd.find_element_by_name("submit").click()
 
     def click_modify_button(self):
+        self.group_cache = None
         self.app.wd.find_element_by_name("edit").click()
+
+    def click_on_a_delete_group_button(self):
+        self.group_cache = None
+        self.app.wd.find_element_by_name("delete").click()
 
     def fill_info_fields(self, group):
         # Fill group data
@@ -62,9 +69,6 @@ class GroupHelper:
     def click_on_a_checkbox_of_a_first_group(self):
         self.app.wd.find_element_by_css_selector("span.group input[type='checkbox']").click()
 
-    def click_on_a_delete_group_button(self):
-        self.app.wd.find_element_by_name("delete").click()
-
     def go_back_to_group_page(self):
         self.app.wd.find_element_by_link_text("group page").click()
 
@@ -72,14 +76,17 @@ class GroupHelper:
         self.open_groups_page()
         return len(self.app.wd.find_elements_by_css_selector("input[type='checkbox'][name='selected[]']"))
 
+    group_cache = None
+
     def get_list(self):
-        self.open_groups_page()
-        group_web_elements = self.app.wd.find_elements_by_css_selector("span.group")
+        if self.group_cache is None:
+            self.open_groups_page()
+            group_web_elements = self.app.wd.find_elements_by_css_selector("span.group")
 
-        group_list = []
-        for table_row in group_web_elements:
-            input_inside_element = table_row.find_element_by_css_selector("input")
-            current_group_id = input_inside_element.get_property("value")
-            group_list.append(Group(name=table_row.text, group_id=int(current_group_id)))
+            self.group_cache = []
+            for table_row in group_web_elements:
+                input_inside_element = table_row.find_element_by_css_selector("input")
+                current_group_id = input_inside_element.get_property("value")
+                self.group_cache.append(Group(name=table_row.text, group_id=int(current_group_id)))
 
-        return group_list
+        return self.group_cache.copy()
