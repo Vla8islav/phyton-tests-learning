@@ -7,7 +7,7 @@ def test_delete_first_group(app):
     group_list_at_start = app.group.get_list()
     app.group.delete()
     group_list_after_deletion = app.group.get_list()
-    assert len(group_list_at_start) - 1 == len(group_list_after_deletion)
+    assert len(group_list_at_start) - 1 == app.group.count()
     expected_group_list = group_list_at_start.copy()
     expected_group_list[0:1] = []
     assert group_list_after_deletion == expected_group_list

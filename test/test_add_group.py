@@ -7,7 +7,7 @@ def test_group_create_empty_values(app):
     group_list_at_start = app.group.get_list()
     app.group.create(group)
     group_list_after_creation = app.group.get_list()
-    assert len(group_list_at_start) + 1 == len(group_list_after_creation)
+    assert len(group_list_at_start) + 1 == app.group.count()
     expected_group_list = group_list_at_start.copy()
     expected_group_list.append(group)
 
@@ -19,7 +19,7 @@ def test_group_create(app):
     group_list_at_start = app.group.get_list()
     app.group.create(group)
     group_list_after_creation = app.group.get_list()
-    assert len(group_list_at_start) + 1 == len(group_list_after_creation)
+    assert len(group_list_at_start) + 1 == app.group.count()
     expected_group_list = group_list_at_start.copy()
     expected_group_list.append(group)
 

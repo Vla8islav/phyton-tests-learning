@@ -10,7 +10,7 @@ def test_group_modify_first_group(app):
     group_list_at_start = app.group.get_list()
     app.group.modify_group(group)
     group_list_after_modification = app.group.get_list()
-    assert len(group_list_at_start) == len(group_list_after_modification)
+    assert len(group_list_at_start) == app.group.count()
     group.id = group_list_at_start[0].id
     expected_new_group_list = group_list_at_start.copy()
     expected_new_group_list[0:1] = [group]
@@ -24,7 +24,7 @@ def test_group_modify_first_group_name_only(app):
     group_list_at_start = app.group.get_list()
     app.group.modify_group(group)
     group_list_after_modification = app.group.get_list()
-    assert len(group_list_at_start) == len(group_list_after_modification)
+    assert len(group_list_at_start) == app.group.count()
     group.id = group_list_at_start[0].id
     expected_new_group_list = group_list_at_start.copy()
     expected_new_group_list[0:1] = [group]
