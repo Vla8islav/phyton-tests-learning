@@ -11,17 +11,23 @@ class ContactHelper:
         self.fill_info_fields(c)
         self.submit_new_contact()
 
-    def modify_first_contact(self, c):
+    def modify_contact(self, c, index):
         self.open_list_page()
-        self.modify_first_contact_in_a_list()
+        self.click_edit_button(index)
         self.fill_info_fields(c)
         self.update_contact()
 
-    def delete_first_contact(self):
+    def modify_first_contact(self, c):
+        self.modify_contact(c, 0)
+
+    def delete_contact(self, index):
         self.open_list_page()
-        self.check_first_contact_in_a_list()
+        self.check_contact_in_a_list(index)
         self.click_delete_button()
         self.confirm_contact_deletion()
+
+    def delete_first_contact(self):
+        self.delete_contact(0)
 
     def submit_new_contact(self):
         self.app.wd.find_element_by_css_selector(
@@ -54,11 +60,14 @@ class ContactHelper:
                 or not self.app.wd.current_url.endswith("/"):
             self.app.wd.find_element_by_xpath("//a[.='home']").click()
 
-    def check_first_contact_in_a_list(self):
-        self.app.wd.find_element_by_css_selector("input[type=checkbox]").click()
+    def check_contact_in_a_list(self, index):
+        self.app.wd.find_elements_by_css_selector("input[type=checkbox]")[index].click()
 
-    def modify_first_contact_in_a_list(self):
-        self.app.wd.find_element_by_css_selector("td img[title='Edit']").click()
+    def check_first_contact_in_a_list(self):
+        self.check_contact_in_a_list(0)
+
+    def click_edit_button(self, index):
+        self.app.wd.find_elements_by_css_selector("td img[title='Edit']")[index].click()
 
     def click_delete_button(self):
         self.app.wd.find_element_by_css_selector("input[value='Delete']").click()
