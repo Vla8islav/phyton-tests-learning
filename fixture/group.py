@@ -12,16 +12,16 @@ class GroupHelper:
         self.click_submit_data_button()
         self.go_back_to_group_page()
 
-    def modify_group(self, group):
+    def modify_group(self, group, index):
         self.open_groups_page()
-        self.modify_first_group(group)
-
-    def modify_first_group(self, group):
-        self.click_on_a_checkbox_of_a_first_group()
+        self.click_on_a_checkbox_of_a_group(index)
         self.click_modify_button()
         self.fill_info_fields(group)
         self.click_update_data_button()
         self.go_back_to_group_page()
+
+    def modify_first_group(self):
+        self.modify_group(0)
 
     def delete(self, index):
         self.open_groups_page()
