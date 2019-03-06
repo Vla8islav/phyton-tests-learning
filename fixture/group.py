@@ -23,9 +23,9 @@ class GroupHelper:
         self.click_update_data_button()
         self.go_back_to_group_page()
 
-    def delete(self):
+    def delete(self, index):
         self.open_groups_page()
-        self.delete_first_group()
+        self.delete_group(index)
         self.go_back_to_group_page()
 
     def click_update_data_button(self):
@@ -62,12 +62,18 @@ class GroupHelper:
                 len(self.app.wd.find_elements_by_css_selector("input[value='Delete group(s)'][name='delete']")) > 0):
             self.app.wd.get("http://localhost/addressbook/group.php")
 
-    def delete_first_group(self):
-        self.click_on_a_checkbox_of_a_first_group()
+    def delete_group(self, index):
+        self.click_on_a_checkbox_of_a_group(index)
         self.click_on_a_delete_group_button()
 
+    def delete_first_group(self):
+        self.delete_group(0)
+
+    def click_on_a_checkbox_of_a_group(self, index):
+        self.app.wd.find_elements_by_css_selector("span.group input[type='checkbox']")[index].click()
+
     def click_on_a_checkbox_of_a_first_group(self):
-        self.app.wd.find_element_by_css_selector("span.group input[type='checkbox']").click()
+        self.click_on_a_checkbox_of_a_group(0)
 
     def go_back_to_group_page(self):
         self.app.wd.find_element_by_link_text("group page").click()
