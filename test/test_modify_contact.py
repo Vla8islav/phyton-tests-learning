@@ -8,6 +8,7 @@ def test_modify_first_contact(app):
 
     contact_list_at_start = app.contact.get_list()
     app.contact.modify_first_contact(c)
+    assert len(contact_list_at_start) == app.contact.count()
     contact_list_after_modification = app.contact.get_list()
 
     expected_contact_list = contact_list_at_start.copy()

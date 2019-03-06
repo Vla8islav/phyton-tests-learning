@@ -6,6 +6,7 @@ def test_create_user1(app):
     c = Contact("Name", "MiddleName", "LastName", "email@email.com")
     contact_list_at_start = app.contact.get_list()
     app.contact.create(c)
+    assert len(contact_list_at_start) + 1 == app.contact.count()
     contact_list_after_addition = app.contact.get_list()
 
     expected_contact_list = contact_list_at_start.copy()
@@ -19,6 +20,7 @@ def test_create_user2(app):
     c = Contact("Name2", "MiddleName2", "LastName2", "email2@email.com")
     contact_list_at_start = app.contact.get_list()
     app.contact.create(c)
+    assert len(contact_list_at_start) + 1 == app.contact.count()
     contact_list_after_addition = app.contact.get_list()
 
     expected_contact_list = contact_list_at_start.copy()

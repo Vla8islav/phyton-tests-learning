@@ -70,6 +70,7 @@ class ContactHelper:
 
     def count(self):
         self.open_list_page()
+        self.app.wd.refresh()
         return len(self.app.wd.find_elements_by_css_selector("input[type='checkbox'][name='selected[]']"))
 
     list_cache = None
