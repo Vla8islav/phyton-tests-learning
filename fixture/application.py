@@ -19,9 +19,14 @@ class Application:
     def destroy(self):
         self.wd.quit()
 
+    def open_page_relative(self, right_part_of_url):
+        if '/' != right_part_of_url[0]:
+            right_part_of_url = "%s%s" % ('/', right_part_of_url)
+        self.wd.get("http://localhost%s" % right_part_of_url)
+
     def open_home_page(self):
         # Open home page
-        self.wd.get("http://localhost/addressbook/index.php")
+        self.open_page_relative("addressbook/index.php")
         self.wd.refresh()
 
     def is_valid(self):

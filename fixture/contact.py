@@ -46,7 +46,13 @@ class ContactHelper:
         self.app.ge.type("[name='firstname']", contact.name)
         self.app.ge.type("[name='middlename']", contact.middle_name)
         self.app.ge.type("[name='lastname']", contact.last_name)
+        self.app.ge.type("[name='home']", contact.phone_home)
+        self.app.ge.type("[name='mobile']", contact.phone_mobile)
+        self.app.ge.type("[name='work']", contact.phone_work)
+        self.app.ge.type("[name='fax']", contact.phone_fax)
         self.app.ge.type("[name='email']", contact.email)
+        self.app.ge.type("[name='email2']", contact.email2)
+        self.app.ge.type("[name='email3']", contact.email3)
 
     def open_creation_page(self):
         if not (self.app.wd.current_url.endswith("/edit.php") and
@@ -102,6 +108,35 @@ class ContactHelper:
                     phone_list = contact_columns[5].text
 
                     self.list_cache.append(
-                        Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email=email))
+                        Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email=email,phone_fax=phone_list,address=address))
 
         return self.list_cache.copy()
+
+    def get_full_contact_info_sting_by_position_in_contact_list(self, contact_list_index):
+        contact = self.get_list()[contact_list_index]
+        self.open_contact_edit_page_by_id(contact.id)
+
+        contact_full_text_element = self.app.wd.find_element_by_css_selector("div#content")
+        return contact_full_text_element.text
+
+    def open_contact_info_page_by_id(self, contact_id):
+        self.app.open_page_relative("/addressbook/view.php?id=%s" % contact_id)
+
+    def open_contact_edit_page_by_id(self, contact_id):
+        self.app.open_page_relative("/addressbook/edit.php?id=%s" % contact_id)
+
+    def get_contact_info_from_edit_page(self, contact_id):
+        self.open_contact_edit_page_by_id(contact_id)
+        wd = self.app.wd
+        contact = Contact(name=wd.find_element_by_css_selector("[name='firstname']").get_attribute("value"),
+                          middle_name=wd.find_element_by_css_selector("[name='middlename']").get_attribute("value"),
+                          last_name=wd.find_element_by_css_selector("[name='lastname']").get_attribute("value"),
+                          phone_home=wd.find_element_by_css_selector("[name='home']").get_attribute("value"),
+                          phone_mobile=wd.find_element_by_css_selector("[name='mobile']").get_attribute("value"),
+                          phone_work=wd.find_element_by_css_selector("[name='work']").get_attribute("value"),
+                          phone_fax=wd.find_element_by_css_selector("[name='fax']").get_attribute("value"),
+                          email=wd.find_element_by_css_selector("[name='email']").get_attribute("value"),
+                          email2=wd.find_element_by_css_selector("[name='email2']").get_attribute("value"),
+                          email3=wd.find_element_by_css_selector("[name='email3']").get_attribute("value"),
+                          contact_id=str(contact_id))
+        return contact

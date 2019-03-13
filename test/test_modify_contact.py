@@ -5,8 +5,8 @@ from model.contact import Contact
 
 def test_modify_first_contact(app):
     if app.contact.count() < 1:
-        app.contact.create(Contact("New contact name"))
-    c = Contact("Name%s" % randint(0, 10), "MiddleName3", "LastName3", "email3@email.com")
+        app.contact.create(Contact(name="New contact name"))
+    c = Contact(name="Name%s" % randint(0, 10),middle_name= "MiddleName3",last_name= "LastName3",email= "email3@email.com")
 
     index = randint(0, app.contact.count()-1)
     contact_list_at_start = app.contact.get_list()
