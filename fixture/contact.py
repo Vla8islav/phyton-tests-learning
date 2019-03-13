@@ -104,12 +104,14 @@ class ContactHelper:
                     last_name = contact_columns[1].text
                     first_name = contact_columns[2].text
                     address = contact_columns[3].text
-                    email = contact_columns[4].text
+                    email_list = contact_columns[4].text
+                    email = email_list
                     phone_list = contact_columns[5].text
+                    phone_fax = phone_list
 
                     self.list_cache.append(
-                        Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email=email,
-                                phone_fax=phone_list, address=address))
+                        Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email_list=email_list,
+                                phone_list=phone_list, address=address))
 
         return self.list_cache.copy()
 
