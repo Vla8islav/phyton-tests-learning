@@ -8,7 +8,7 @@ def test_group_modify_first_group(app):
         app.group.create(Group("New group name"))
     group = Group("New value1", "val2", "val3")
     group_list_at_start = app.group.get_list()
-    index = randint(0, app.group.count())
+    index = randint(0, app.group.count()-1)
     app.group.modify_group(group, index)
     group_list_after_modification = app.group.get_list()
     assert len(group_list_at_start) == app.group.count()
