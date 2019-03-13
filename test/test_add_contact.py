@@ -3,7 +3,7 @@ from model.user import User
 
 
 def test_create_user1(app):
-    c = Contact("Name", "MiddleName", "LastName", "email@email.com")
+    c = Contact(name="Name", middle_name="MiddleName", last_name="LastName", email="email@email.com")
     contact_list_at_start = app.contact.get_list()
     app.contact.create(c)
     assert len(contact_list_at_start) + 1 == app.contact.count()
@@ -17,7 +17,7 @@ def test_create_user1(app):
 
 
 def test_create_user2(app):
-    c = Contact("Name2", "MiddleName2", "LastName2", "email2@email.com")
+    c = Contact(name="Name2", middle_name="MiddleName2", last_name="LastName2", email="email2@email.com")
     contact_list_at_start = app.contact.get_list()
     app.contact.create(c)
     assert len(contact_list_at_start) + 1 == app.contact.count()

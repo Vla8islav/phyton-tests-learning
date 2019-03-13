@@ -108,7 +108,8 @@ class ContactHelper:
                     phone_list = contact_columns[5].text
 
                     self.list_cache.append(
-                        Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email=email,phone_fax=phone_list,address=address))
+                        Contact(contact_id=int(contact_id), name=first_name, last_name=last_name, email=email,
+                                phone_fax=phone_list, address=address))
 
         return self.list_cache.copy()
 
@@ -138,5 +139,6 @@ class ContactHelper:
                           email=wd.find_element_by_css_selector("[name='email']").get_attribute("value"),
                           email2=wd.find_element_by_css_selector("[name='email2']").get_attribute("value"),
                           email3=wd.find_element_by_css_selector("[name='email3']").get_attribute("value"),
-                          contact_id=str(contact_id))
+                          address=wd.find_element_by_css_selector("[name='address']").get_attribute("value"),
+                          contact_id=contact_id)
         return contact

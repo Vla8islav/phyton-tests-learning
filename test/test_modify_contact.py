@@ -15,7 +15,7 @@ def test_modify_first_contact(app):
     contact_list_after_modification = app.contact.get_list()
 
     expected_contact_list = contact_list_at_start.copy()
-    c.id = contact_list_at_start[index].id
+    c.contact_id = contact_list_at_start[index].contact_id
     expected_contact_list[index] = c
 
     assert sorted(expected_contact_list, key=Contact.id_with_none) == sorted(contact_list_after_modification,

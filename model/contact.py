@@ -12,7 +12,7 @@ class Contact:
         self.email = email
         self.email2 = email2
         self.email3 = email3
-        self.id = contact_id
+        self.contact_id = contact_id
         self.phone_home = phone_home
         self.phone_mobile = phone_mobile
         self.phone_work = phone_work
@@ -21,13 +21,13 @@ class Contact:
 
     def __repr__(self):
         return "Id\t'%s'\tName\t'%s'\tLast name\t'%s'\tMiddle name\t'%s'\tEmail\t'%s'" % (
-            self.id, self.name, self.last_name, self.middle_name, self.email)
+            self.contact_id, self.name, self.last_name, self.middle_name, self.email)
 
     def __eq__(self, other):
         return self.name == other.name and self.last_name == other.last_name
 
     def id_with_none(c):
-        if c.id:
-            return c.id
+        if c.contact_id:
+            return c.contact_id
         else:
             return maxsize
