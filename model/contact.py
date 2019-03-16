@@ -1,3 +1,4 @@
+import re
 from sys import maxsize
 
 
@@ -48,6 +49,7 @@ class Contact:
         retval = self.phone_list
         if retval is None:
             retval = self.concat_no_none([self.phone_home, self.phone_mobile, self.phone_work])
+        retval = re.sub("[()\- ]", '', retval)
         return retval
 
     def contact_view_representation(self):
