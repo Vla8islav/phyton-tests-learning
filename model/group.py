@@ -10,7 +10,7 @@ class Group:
         self.id = group_id
 
     def __repr__(self):
-        return "Id\t%s\tName\t%s\t" % (self.id, self.name)
+        return "Id\t%s\tName\t%s\tHeader\t%s\tFooter\t%s" % (self.id, self.name, self.header, self.footer)
 
     def __eq__(self, other):
         return self.name == other.name and (self.id is None or other.id is None or self.id == other.id)
