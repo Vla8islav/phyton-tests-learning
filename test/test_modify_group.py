@@ -19,7 +19,7 @@ test_data = [
 @pytest.mark.parametrize("group", test_data, ids=[repr(x) for x in test_data])
 def test_group_modify_first_group(app, group):
     if app.group.count() < 1:
-        app.group.create(Group("New group name"))
+        app.group.create(Group(random_string("New group name", 10)))
     group_list_at_start = app.group.get_list()
     index = random.randint(0, app.group.count() - 1)
     app.group.modify_group(group, index)
