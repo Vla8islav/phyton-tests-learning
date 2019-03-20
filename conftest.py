@@ -6,11 +6,13 @@ fixture = None
 
 
 @pytest.fixture
-def app():
+def app(request):
     global fixture
     user = User("admin", "secret")
     if fixture is None:
-        fixture = Application()
+        browser = request.config.getoption("--browser")
+        url = request.config.getoption("--url")
+        fixture = Application(browser, url)
         fixture.session.login(user)
     elif not fixture.is_valid():
         fixture = Application()
@@ -27,3 +29,8 @@ def stop(request):
 
     request.addfinalizer(fin)
     return fixture
+
+
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="firefox")
+    parser.addoption("--url", action="store", default="http://localhost/addressbook/")
