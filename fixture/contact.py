@@ -123,10 +123,10 @@ class ContactHelper:
         return contact_full_text_element.text
 
     def open_contact_view_page_by_id(self, contact_id):
-        self.app.open_page_relative("/addressbook/view.php?id=%s" % contact_id)
+        self.app.open_page_relative("/view.php?id=%s" % contact_id)
 
     def open_contact_edit_page_by_id(self, contact_id):
-        self.app.open_page_relative("/addressbook/edit.php?id=%s" % contact_id)
+        self.app.open_page_relative("/edit.php?id=%s" % contact_id)
 
     def get_contact_info_from_edit_page(self, contact_id):
         self.open_contact_edit_page_by_id(contact_id)
