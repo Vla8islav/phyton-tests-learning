@@ -9,11 +9,19 @@ fixture = None
 target = None
 
 
+def get_project_folder():
+    return os.path.dirname(os.path.realpath(__file__))
+
+
+def get_data_folder():
+    return os.path.join(get_project_folder(), "data")
+
+
 @pytest.fixture
 def app(request):
     global fixture
     global target
-    config_file_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), request.config.getoption("--target"))
+    config_file_name = os.path.join(get_project_folder(), request.config.getoption("--target"))
     if target is None:
         with open(config_file_name) as config_file:
             target = json.load(config_file)
