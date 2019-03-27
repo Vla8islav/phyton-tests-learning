@@ -3,12 +3,8 @@ import string
 
 import pytest
 
+from generator.random_string import random_string
 from model.group import Group
-
-
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + ' ' * 5
-    return prefix + ''.join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 test_data = [
