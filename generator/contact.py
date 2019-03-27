@@ -1,10 +1,10 @@
 import getopt
-import json
 import os
 import sys
 
 import conftest
 from generator.random_string import random_string
+from generator.serialize import serialize_and_write
 from model.contact import Contact
 
 try:
@@ -32,6 +32,6 @@ test_data = [
             phone_mobile=random_string('+7(916) 111-22-33', 10), phone_work=random_string('321312', 10))
     for i in range(n)]
 
-with open(file, "w") as f:
-    f.write(json.dumps(test_data, default=lambda x: x.__dict__, indent=2))
+serialize_and_write(file, test_data)
+
 

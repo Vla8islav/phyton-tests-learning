@@ -1,10 +1,10 @@
 import getopt
-import json
 import os
 import sys
 
 import conftest
 from generator.random_string import random_string
+from generator.serialize import serialize_and_write
 from model.group import Group
 
 try:
@@ -28,5 +28,5 @@ test_data = [
     Group(name=random_string("name", 10), header=random_string("header", 10), footer=random_string("footer", 10))
     for i in range(n)]
 
-with open(file, "w") as f:
-    f.write(json.dumps(test_data, default=lambda x: x.__dict__, indent=2))
+serialize_and_write(file, test_data)
+

@@ -1,32 +1,30 @@
 [
   {
-    "name": "name7sTAfA",
+    "footer": "footerNP1H ",
+    "header": "header",
     "id": null,
-    "header": "headerL4Z",
-    "footer": "footer"
+    "name": "name",
+    "py/object": "model.group.Group"
   },
   {
-    "name": "namekj C",
+    "footer": "footer2",
+    "header": "headern",
     "id": null,
-    "header": "headerHbOTi5A95",
-    "footer": "footer"
+    "name": "name 6HdQn8bU",
+    "py/object": "model.group.Group"
   },
   {
-    "name": "nameIyyq ",
+    "footer": "footert",
+    "header": "headerGw1 ",
     "id": null,
-    "header": "headerS4rNxx 84",
-    "footer": "footerdQ1"
+    "name": "name4",
+    "py/object": "model.group.Group"
   },
   {
-    "name": "nameMHd",
+    "footer": "footerlHG2j",
+    "header": "headerN9BK gn a",
     "id": null,
-    "header": "headerU6mslr4SC",
-    "footer": "footerHYjT7 "
-  },
-  {
-    "name": "name 8u8ZFna",
-    "id": null,
-    "header": "headerqR",
-    "footer": "footert"
+    "name": "nameriiLJBr",
+    "py/object": "model.group.Group"
   }
 ]
