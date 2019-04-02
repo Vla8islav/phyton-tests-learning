@@ -1,6 +1,7 @@
 from selenium import webdriver
 
 from fixture.contact import ContactHelper
+from fixture.dbfixture import DbFixture
 from fixture.group import GroupHelper
 from fixture.session import SessionHelper
 from fixture.generic_elements import GenericElementsHelper
@@ -22,6 +23,7 @@ class Application:
         self.contact = ContactHelper(self)
         self.group = GroupHelper(self)
         self.ge = GenericElementsHelper(self)
+        self.db = DbFixture(self)
 
     def destroy(self):
         self.wd.quit()
