@@ -23,7 +23,6 @@ class Application:
         self.contact = ContactHelper(self)
         self.group = GroupHelper(self)
         self.ge = GenericElementsHelper(self)
-        self.db = DbFixture(self)
 
     def destroy(self):
         self.wd.quit()
