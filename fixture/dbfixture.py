@@ -17,7 +17,8 @@ class DbFixture:
         retval = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select group_id, group_name, group_header, group_footer from group_list")
+            cursor.execute(
+                "select group_id, group_name, group_header, group_footer from group_list order by group_name, group_id")
             for row in cursor:
                 (id, name, header, footer) = row
                 retval.append(Group(group_id=id, name=name, header=header, footer=footer))

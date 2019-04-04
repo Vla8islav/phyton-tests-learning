@@ -7,16 +7,20 @@ from generator.random_string import random_string
 from model.group import Group
 
 
-def test_group_modify_first_group(app, json_groups):
+def test_group_modify_group(app, json_groups, db, check_ui):
     if app.group.count() < 1:
         app.group.create(Group(random_string("New group name", 10)))
-    group_list_at_start = app.group.get_list()
-    index = random.randint(0, app.group.count() - 1)
+    index = random.randint(0, len(db.get_group_list()))
+    group_list_at_start = db.get_group_list()
     app.group.modify_group(json_groups, index)
-    group_list_after_modification = app.group.get_list()
-    assert len(group_list_at_start) == app.group.count()
+    group_list_after_modification = db.get_group_list()
+    assert len(group_list_at_start) == len(db.get_group_list())
     json_groups.id = group_list_at_start[index].id
-    expected_new_group_list = group_list_at_start.copy()
-    expected_new_group_list[index:index + 1] = [json_groups]
-    assert sorted(expected_new_group_list, key=Group.id_with_none) == sorted(group_list_after_modification,
+    expected_group_list = group_list_at_start.copy()
+    expected_group_list[index:index + 1] = [json_groups]
+    assert sorted(expected_group_list, key=Group.id_with_none) == sorted(group_list_after_modification,
                                                                              key=Group.id_with_none)
+    if check_ui:
+        assert sorted(expected_group_list, key=Group.id_with_none) == sorted(app.group.get_list(),
+                                                                             key=Group.id_with_none)
+
