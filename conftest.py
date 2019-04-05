@@ -70,7 +70,8 @@ def stop(request):
 
 @pytest.fixture
 def check_ui(request):
-    return request.config.getoption("--check-ui")
+    retval = request.config.getoption("--check-ui")
+    return retval
 
 
 def pytest_addoption(parser):
