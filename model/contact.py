@@ -33,6 +33,12 @@ class Contact:
     def __eq__(self, other):
         return self.name == other.name and self.last_name == other.last_name
 
+    def address_string_representation(self):
+        if self.address is None:
+            return ''
+        else:
+            return self.address
+
     def id_with_none(c):
         if c.contact_id:
             return c.contact_id

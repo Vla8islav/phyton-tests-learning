@@ -9,8 +9,8 @@ def test_delete_group(app, db, check_ui):
     index = randint(0, len(db.get_group_list()))
     group_list_at_start = db.get_group_list()
     app.group.delete(index)
-    assert len(group_list_at_start) - 1 == len(db.get_group_list())
     group_list_after_deletion = db.get_group_list()
+    assert len(group_list_at_start) - 1 == len(group_list_after_deletion)
     expected_group_list = group_list_at_start.copy()
     expected_group_list[index:index+1] = []
     assert group_list_after_deletion == expected_group_list
