@@ -60,7 +60,12 @@ class GroupHelper:
     def open_groups_page(self):
         if not (self.app.wd.current_url.endswith("/group.php") and
                 len(self.app.wd.find_elements_by_css_selector("input[value='Delete group(s)'][name='delete']")) > 0):
-            self.app.wd.get("http://localhost/addressbook/group.php")
+            self.app.open_page_relative("/group.php")
+
+    def open_specific_group_page(self, group_id):
+        relative_group_url = "/?group=%s" % group_id
+        if not (self.app.wd.current_url.endswith(relative_group_url)):
+            self.app.open_page_relative(relative_group_url)
 
     def delete_group(self, index):
         self.click_on_a_checkbox_of_a_group(index)

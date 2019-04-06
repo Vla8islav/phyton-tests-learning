@@ -49,7 +49,7 @@ class Contact:
         retval = self.email_list
         if retval is None:
             retval = self.concat_no_none([self.email, self.email2, self.email3])
-        retval = re.sub("[\\\]", '', retval)
+        retval = re.sub("[\\\ ]", '', retval)
         return retval
 
     def phone_list_representation(self):

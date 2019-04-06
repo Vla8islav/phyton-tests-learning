@@ -67,6 +67,10 @@ class ContactHelper:
                 or not self.app.wd.current_url.endswith("/"):
             self.app.wd.find_element_by_xpath("//a[.='home']").click()
 
+    def check_contact_in_a_list_by_id(self, contact_id):
+        css_selector = "input[type=checkbox][id='%s']" % contact_id
+        self.app.wd.find_element_by_css_selector(css_selector).click()
+
     def check_contact_in_a_list(self, index):
         self.app.wd.find_elements_by_css_selector("input[type=checkbox]")[index].click()
 
