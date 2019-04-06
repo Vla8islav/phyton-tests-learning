@@ -25,6 +25,7 @@ class ContactHelper:
         self.check_contact_in_a_list(index)
         self.click_delete_button()
         self.confirm_contact_deletion()
+        self.app.wd.refresh()
 
     def delete_first_contact(self):
         self.delete_contact(0)

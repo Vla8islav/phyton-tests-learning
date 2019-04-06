@@ -16,6 +16,9 @@ class DbFixture:
 
     def get_contact_list(self):
         retval = []
+        self.connection.close()
+        self.connection =  pymysql.connect(host=self.host, database=self.database, user=self.user,
+                                          password=self.password, autocommit=True)
         cursor = self.connection.cursor()
         try:
             cursor.execute(
@@ -23,14 +26,14 @@ class DbFixture:
                                      addr_long, addr_lat, addr_status, home, mobile, work, fax, email, email2, email3,\
                                      im, im2, im3, homepage, bday, bmonth, byear, aday, amonth, ayear, address2, phone2,\
                                      notes, photo, x_vcard, x_activesync, created, modified, deprecated, password,\
-                                     login, role from addressbook")
+                                     login, role from addressbook where deprecated is null")
             for row in cursor:
                 (domain_id, id, firstname, middlename, lastname, nickname, company, title, address,
                  addr_long, addr_lat, addr_status, home, mobile, work, fax, email, email2, email3,
                  im, im2, im3, homepage, bday, bmonth, byear, aday, amonth, ayear, address2, phone2,
                  notes, photo, x_vcard, x_activesync, created, modified, deprecated, password,
                  login, role) = row
-                retval.append(Contact(name=firstname, last_name=lastname,
+                retval.append(Contact(contact_id=id, name=firstname, last_name=lastname,
                                       middle_name=middlename, email=email,
                                       email2=email2, email3=email3,
                                       phone_fax=fax, phone_home=home,
@@ -47,7 +50,8 @@ class DbFixture:
         cursor = self.connection.cursor()
         try:
             cursor.execute(
-                "select group_id, group_name, group_header, group_footer from group_list order by group_name, group_id")
+                "select group_id, group_name, group_header, group_footer from group_list "
+                "where deprecated is null order by group_name, group_id")
             for row in cursor:
                 (id, name, header, footer) = row
                 retval.append(Group(group_id=id, name=name, header=header, footer=footer))

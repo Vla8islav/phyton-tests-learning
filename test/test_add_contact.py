@@ -12,6 +12,6 @@ def test_contact_create(app, json_contacts, db, check_ui):
 
     assert sorted(expected_contact_list, key=Contact.id_with_none) == sorted(contact_list_after_addition,
                                                                              key=Contact.id_with_none)
-    if True:
-        assert sorted(expected_contact_list, key=Contact.id_with_none) == sorted(app.contact.get_list(),
-                                                                                 key=Contact.id_with_none)
+    if check_ui:
+        assert sorted(app.contact.get_list(), key=Contact.id_with_none) == \
+               sorted(expected_contact_list, key=Contact.id_with_none)
