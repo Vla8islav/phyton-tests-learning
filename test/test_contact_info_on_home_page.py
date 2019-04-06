@@ -3,7 +3,7 @@ from random import randint
 from model.contact import Contact
 
 
-def test_check_if_contact_info_list_matches_an_actual_info(app, db):
+def test_contact_info_list_matches_database_info(app, db):
     if app.contact.count() < 1:
         app.contact.create(Contact(name="FirstName", last_name='lastname', middle_name='middleName', email='232322',
                                    email2='12121@243.ru', email3='7777@vfd.re', phone_fax='34234', phone_home='3243242',

@@ -3,7 +3,7 @@ from random import randint
 from model.contact import Contact
 
 
-def test_modify_first_contact(app, json_contact, db, check_ui):
+def test_modify_contact(app, json_contact, db, check_ui):
     if app.contact.count() < 1:
         app.contact.create(Contact(name="New contact name"))
     c = json_contact
