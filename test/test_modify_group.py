@@ -8,7 +8,7 @@ from model.group import Group
 
 
 def test_group_modify_group(app, json_groups, db, check_ui):
-    if app.group.count() < 1:
+    if len(db.get_group_list()) < 1:
         app.group.create(Group(random_string("New group name", 10)))
     index = random.randint(0, len(db.get_group_list()) - 1)
     group_list_at_start = db.get_group_list()

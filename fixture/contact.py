@@ -65,7 +65,7 @@ class ContactHelper:
         if not ((self.app.wd.current_url.endswith("/") and
                  len(self.app.wd.find_elements_by_css_selector("input[type=button][value='Send e-Mail']")) > 0)) \
                 or not self.app.wd.current_url.endswith("/"):
-            self.app.wd.find_element_by_xpath("//a[.='home']").click()
+            self.app.open_page_relative("/")
 
     def check_contact_in_a_list_by_id(self, contact_id):
         css_selector = "input[type=checkbox][id='%s']" % contact_id

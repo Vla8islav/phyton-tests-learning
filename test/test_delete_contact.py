@@ -4,7 +4,7 @@ from model.contact import Contact
 
 
 def test_delete_contact(app, db, check_ui):
-    if app.contact.count() < 1:
+    if len(db.get_contact_list()) < 1:
         app.contact.create(Contact(name="FirstName", last_name='lastname', middle_name='middleName', email='232322',
                                    email2='12121@243.ru', email3='7777@vfd.re', phone_fax='34234', phone_home='3243242',
                                    phone_mobile='23432', phone_work='321312'))

@@ -24,7 +24,7 @@ class DbFixture:
                                      addr_long, addr_lat, addr_status, home, mobile, work, fax, email, email2, email3,\
                                      im, im2, im3, homepage, bday, bmonth, byear, aday, amonth, ayear, address2, phone2,\
                                      notes, photo, x_vcard, x_activesync, created, modified, deprecated, password,\
-                                     login, role from addressbook where deprecated is null order by lastname, firstname, id desc")
+                                     login, role from addressbook where deprecated is null order by lastname, firstname, id")
             for row in cursor:
                 (domain_id, id, firstname, middlename, lastname, nickname, company, title, address,
                  addr_long, addr_lat, addr_status, home, mobile, work, fax, email, email2, email3,

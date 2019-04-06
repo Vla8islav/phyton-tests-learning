@@ -6,7 +6,7 @@ def test_group_create(app, db, check_ui, json_groups):
     group_list_at_start = db.get_group_list()
     app.group.create(group)
     group_list_after_creation = db.get_group_list()
-    assert len(group_list_at_start) + 1 == app.group.count()
+    assert len(group_list_at_start) + 1 == len(group_list_after_creation)
     expected_group_list = group_list_at_start.copy()
     expected_group_list.append(group)
 

@@ -68,3 +68,14 @@ class Contact:
     @staticmethod
     def concat_no_none(array_of_strings):
         return '\n'.join(filter(None, array_of_strings))
+
+    def list_name_representation(self, name):
+        retval = name.strip()
+        retval = re.sub("  ", ' ', retval)
+        return retval
+
+    def name_l(self):
+        return self.list_name_representation(self.name)
+
+    def last_name_l(self):
+        return self.list_name_representation(self.last_name)

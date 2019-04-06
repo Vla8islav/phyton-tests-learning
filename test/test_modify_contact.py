@@ -4,12 +4,13 @@ from model.contact import Contact
 
 
 def test_modify_contact(app, json_contact, db, check_ui):
-    if app.contact.count() < 1:
+    if len(db.get_contact_list()) < 1:
         app.contact.create(Contact(name="New contact name"))
     c = json_contact
 
     contact_list_at_start = db.get_contact_list()
     index = randint(0, len(contact_list_at_start)-1)
+    index = len(contact_list_at_start)-1
     app.contact.modify_contact(c, index)
     contact_list_after_modification = db.get_contact_list()
     assert len(contact_list_at_start) == len(contact_list_after_modification)
