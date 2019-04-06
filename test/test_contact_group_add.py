@@ -1,7 +1,7 @@
 from model.contact_group_relation import ContactGroupRelation
 
 
-def test_add_contact_to_group(app, db, check_ui):
+def test_contact_to_group_add(app, db, check_ui):
     contact = db.get_contacts_without_groups()[0]
     group = db.get_groups_without_contacts()[0]
     app.contact_group_relation.add_contact_to_group(contact, group)

@@ -111,7 +111,9 @@ class DbFixture:
         try:
             cursor.execute(
                 "select distinct aig.group_id, aig.id from address_in_groups aig \
-                    where aig.deprecated is null")
+                join addressbook a on aig.id = a.id \
+                join group_list gl on aig.group_id = gl.group_id \
+                    where aig.deprecated is null and gl.deprecated is null and a.deprecated is null")
             for row in cursor:
                 (group_id, contact_id) = row
                 retval.append(ContactGroupRelation(contact_id=contact_id, group_id=group_id))
