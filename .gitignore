@@ -13,3 +13,4 @@ pip-selfcheck.json
 .idea
 env
 geckodriver.log
+__pycache__
