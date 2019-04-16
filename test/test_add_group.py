@@ -1,18 +1,17 @@
 from model.group import Group
-from model.user import User
 
 
-def test_group_create_empty_values(app):
-    group = Group("", "", "")
-    app.session.login(User("admin", "secret"))
+def test_group_create(app, db, check_ui, json_groups):
+    group = json_groups
+    group_list_at_start = db.get_group_list()
     app.group.create(group)
-    app.session.logout()
+    group_list_after_creation = db.get_group_list()
+    assert len(group_list_at_start) + 1 == len(group_list_after_creation)
+    expected_group_list = group_list_at_start.copy()
+    expected_group_list.append(group)
 
-
-def test_group_create(app):
-    group = Group("Some text 01", "Some text 02", "some text 03")
-    app.session.login(User("admin", "secret"))
-    app.group.create(group)
-    app.session.logout()
-
-
+    assert sorted(expected_group_list, key=Group.id_with_none) == sorted(group_list_after_creation,
+                                                                         key=Group.id_with_none)
+    if check_ui:
+        assert sorted(expected_group_list, key=Group.id_with_none) == sorted(app.group.get_list(),
+                                                                             key=Group.id_with_none)
