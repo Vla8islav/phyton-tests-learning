@@ -1,13 +1,14 @@
 {
   "web": {
-    "baseUrl": "http://localhost/addressbook/",
+    "baseUrl": "http://192.168.88.72:8081/addressbook/",
     "login": "admin",
     "password": "secret"
   },
   "db": {
-    "host": "localhost",
+    "host": "192.168.88.72",
     "database": "addressbook",
     "user": "root",
-    "password": ""
+    "password": "",
+    "port" : 9906
   }
 }

@@ -49,7 +49,7 @@ def app(request):
 def db(request):
     db_config = load_config(request.config.getoption("--target"))["db"]
     db_fixture = DbFixture(host=db_config["host"], database=db_config["database"], user=db_config["user"],
-                           password=db_config["password"])
+                           password=db_config["password"], port=db_config["port"])
 
     def fin():
         db_fixture.destroy()
@@ -77,6 +77,7 @@ def check_ui(request):
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
     parser.addoption("--target", action="store", default="target.json")
+    parser.addoption("--port", action="store", default=3306)
     parser.addoption("--check-ui", action="store_true")
 
 

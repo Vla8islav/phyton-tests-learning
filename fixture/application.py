@@ -7,19 +7,34 @@ from fixture.group import GroupHelper
 from fixture.session import SessionHelper
 from fixture.generic_elements import GenericElementsHelper
 
+from selenium import webdriver
+
+
 
 class Application:
 
     def __init__(self, browser="firefox", url="http://localhost/addressbook/"):
+
+        capabilities = {
+            "browserName": "chrome",
+            "version": "73.0",
+            "enableVNC": True,
+            "enableVideo": False
+        }
+
+        driver = webdriver.Remote(
+            command_executor="http://192.168.88.72:4444/wd/hub",
+            desired_capabilities=capabilities)
         self.app_url = url
-        if browser == "firefox":
-            self.wd = webdriver.Firefox()
-        elif browser == "chrome":
-            self.wd = webdriver.Chrome()
-        elif browser == "ie":
-            self.wd = webdriver.ie
-        else:
-            raise ValueError("Unrecognised browser option %s" % browser)
+        # if browser == "firefox":
+        #     self.wd = webdriver.Firefox()
+        # elif browser == "chrome":
+        #     self.wd = webdriver.Chrome()
+        # elif browser == "ie":
+        #     self.wd = webdriver.ie
+        # else:
+        #     raise ValueError("Unrecognised browser option %s" % browser)
+        self.wd = driver
         self.session = SessionHelper(self)
         self.contact = ContactHelper(self)
         self.group = GroupHelper(self)

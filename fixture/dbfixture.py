@@ -7,13 +7,14 @@ from model.group import Group
 
 class DbFixture:
     def __init__(self, host="localhost", database="addressbook", user="root",
-                 password=""):
+                 password="", port = 3306):
         self.host = host
         self.database = database
         self.user = user
         self.password = password
+        self.port = port
         self.connection = pymysql.connect(host=self.host, database=self.database, user=self.user,
-                                          password=self.password, autocommit=True)
+                                          password=self.password, autocommit=True, port = self.port)
 
     def get_contact_list(self):
         retval = []
