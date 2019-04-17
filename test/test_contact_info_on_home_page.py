@@ -5,7 +5,7 @@ from model.contact import Contact
 
 def test_contact_info_list_matches_database_info(app, db):
     if len(db.get_contact_list()) < 1:
-        app.contact.create(Contact(name="FirstName", last_name='lastname', middle_name='middleName', email='232322',
+        app.contact.create(Contact(name="FirstName1", last_name='lastname', middle_name='middleName', email='232322',
                                    email2='12121@243.ru', email3='7777@vfd.re', phone_fax='34234', phone_home='3243242',
                                    phone_mobile='8(916) 222-33-44', phone_work='321312'))
     contact_info_list_from_db = db.get_contact_list()
