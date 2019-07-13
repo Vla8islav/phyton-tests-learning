@@ -1,11 +1,11 @@
 {
   "web": {
-    "baseUrl": "http://192.168.88.72:8081/addressbook/",
+    "baseUrl": "http://192.168.88.77:8081/addressbook/",
     "login": "admin",
     "password": "secret"
   },
   "db": {
-    "host": "192.168.88.72",
+    "host": "192.168.88.77",
     "database": "addressbook",
     "user": "root",
     "password": "",
