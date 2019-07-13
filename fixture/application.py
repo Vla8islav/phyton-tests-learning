@@ -17,9 +17,9 @@ class Application:
 
         capabilities = {
             "browserName": "chrome",
-            "version": "73.0",
-            "enableVNC": True,
-            "enableVideo": False
+#            "version": "73.0",
+#            "enableVNC": True,
+#            "enableVideo": False
         }
 
         driver = webdriver.Remote(
