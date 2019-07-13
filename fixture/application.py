@@ -23,7 +23,7 @@ class Application:
         }
 
         driver = webdriver.Remote(
-            command_executor="http://192.168.88.72:4444/wd/hub",
+            command_executor="http://192.168.88.77:4444/wd/hub",
             desired_capabilities=capabilities)
         self.app_url = url
         # if browser == "firefox":
